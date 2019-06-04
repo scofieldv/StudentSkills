@@ -1,0 +1,79 @@
+#Jake 10A
+
+#variables
+scoreList = []
+studentList = []
+sum = 0
+c = 1
+
+#inputing the student number and the score
+for i in range(9):
+    while True:
+        c = 1
+        try:
+            studentNum = str(input("\n\nInput the student number\n"))
+            if len(studentNum)==4:
+                for i in range(len(studentList)):
+                    if studentList[i] != studentNum:
+                        c = c*1
+                    else:
+                        c = c*0
+                if c == 1:
+                    studentList.append(studentNum)
+                    break
+            print("\n\nThe student number is wrong, type again\n")
+        except ValueError:
+            print("\n\nThe student number is wrong, type again\n")
+    while True:
+        try:
+            score = float(input("\n\nInput the student score\n"))
+            if score >= 0 and score <=10:
+                scoreList.append(score)
+                break
+            print("\n\nThe score range is 0 to 10\n")
+        except ValueError:
+            print("\n\nInvalid Entry, type again\n")
+
+            
+#calculating the average
+for i in range(9):
+    sum = sum + scoreList[i]
+average = sum/9
+            
+while True:
+    #menu
+    choice = int(input("\n\n1.Calculate the average\n\n2. Show the lowest score\n\n3.Show the highest score\n\n4. Show all scores below the average\n\n5.Exit\n"))
+    #printing the average
+    if choice == 1:
+        print("\n\nAverage :",average)
+    #printing the lowest score and the student(s) numeber
+    elif choice == 2:
+        lowest = 100
+        studNum1 = []
+        for i in range(9):
+            if scoreList[i] <= lowest:
+                lowest = scoreList[i]
+                studNum1.append(i)
+        for i in range(len(studNum1)):
+            print("\n\nLowest score :",lowest,"\n\nStudent number :",studentList[studNum1[i]])
+    #printing the highest score and the student(s) number
+    elif choice == 3:
+        highest = -100
+        studNum2 = []
+        for i in range(9):
+            if scoreList[i] >= highest:
+                highest = scoreList[i]
+                studNum2.append(i)
+        for i in range(len(studNum2)):
+            print("\n\nHighest score :",highest,"\n\nStudent number :",studentList[studNum2[i]])
+    #printing students who got below average and their score
+    elif choice == 4:
+        print("\n\nScores below the average\n")
+        for i in range(9):
+            if scoreList[i]<average:
+                print("\n\nStudent number :",studentList[i],"\n\nScore :",scoreList[i],"\n")
+    #exit
+    elif choice == 5:
+        break
+    else:
+        print("\n\nInvalid Entry, you can type only intigers between 1 to 5\n")
